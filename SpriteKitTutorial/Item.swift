@@ -12,12 +12,12 @@ class Item: SKSpriteNode {
     var column: Int
     var block: Block
     
-    init(row: Int, column: Int, itemSize: CGSize) {
+    init(block: Block = Block.random,
+         row: Int,
+         column: Int,
+         itemSize: CGSize) {
         self.row = row
         self.column = column
-
-        let block = Block.random
-        
         self.block = block
         
         let texture = SKTexture(imageNamed: block.rawValue)
