@@ -6,15 +6,36 @@
 //
 
 import SwiftUI
-import SpriteKit
+import Combine
+import SpriteKit.SKScene
 
 struct ContentView: View {
-    
-    private var game: SKScene = GameScene()
+
+    init(gameManager: GameManager = GameManager()) {
+        let gameScene = GameScene()
+        gameScene.gameManager = gameManager
+        self.gameManager = gameManager
+        self.gameScene = gameScene
+    }
+
+    @ObservedObject private var gameManager: GameManager
+    private let gameScene: GameScene
     
     var body: some View {
-        SpriteView(scene: game)
-            .ignoresSafeArea()
+        ZStack {
+            SpriteView(scene: gameScene)
+                .ignoresSafeArea()
+            VStack {
+                HStack {
+                    Text("score: \(gameManager.score)")
+                        .font(.title)
+                    Spacer()
+                    Text("moves: \(gameManager.move)")
+                        .font(.title)
+                }
+                Spacer()
+            }.padding(30)
+        }
     }
 }
 
