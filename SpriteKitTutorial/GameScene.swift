@@ -6,13 +6,6 @@
 //
 
 import SpriteKit
-import GameplayKit
-import Combine
-
-class GameManager: ObservableObject {
-    @Published var score: Int = 0
-    @Published var move: Int = 0
-}
 
 class GameScene: SKScene {
     
@@ -27,7 +20,7 @@ class GameScene: SKScene {
     private let itemPerColumn = 10
     private let itemPerRow = 8
     private var currentMatch = Set<Item>()
-    var gameManager: GameManager?
+    weak var gameManager: GameManager?
     
     override func didMove(to view: SKView) {
         super.didMove(to: view)
@@ -79,7 +72,6 @@ class GameScene: SKScene {
         }
         columns = itemGrid
     }
-    
     
     private func posiotionItem(for item: Item) -> CGPoint {
         let xOffset: CGFloat = ((scene?.size.width ?? 0) - CGFloat(itemPerRow-1) * itemSize) / 2

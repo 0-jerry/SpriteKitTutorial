@@ -6,7 +6,6 @@
 //
 
 import SpriteKit
-import GameplayKit
 
 class Item: SKSpriteNode {
     var row: Int
